@@ -5,7 +5,7 @@ process.addListener('uncaughtException', function (err, stack) {
   console.log('------------------------');
 });
 
-var Hyjal = require('./lib/hyjal');
+var Hyjal = require('./config/hyjal');
 
 new Hyjal({
   port: 8000

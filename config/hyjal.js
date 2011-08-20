@@ -1,6 +1,7 @@
 var http = require('http')
     , sys = require('sys')
-    , express  = require('express');
+    , express  = require('express')
+    , jade = require('jade');
 
 function Hyjal(options) {
   if (! (this instanceof arguments.callee)) {
@@ -21,9 +22,7 @@ Hyjal.prototype.init = function() {
 
   self.httpServer = self.createHTTPServer();
 
-  self.httpServer.get('/', function(req, res){
-    res.send('Hello World');
-  });
+  require('./routes')(self.httpServer);
 
   self.httpServer.listen(self.settings.port);
 
