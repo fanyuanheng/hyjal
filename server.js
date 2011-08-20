@@ -1,16 +1,12 @@
-var http = require('http'),
-    sys = require('sys');
+process.addListener('uncaughtException', function (err, stack) {
+  console.log('------------------------');
+  console.log('Exception: ' + err);
+  console.log(err.stack);
+  console.log('------------------------');
+});
 
-var server = http.createServer(function (req, res) {
-  req.addListener("end", function(){
-    res.writeHead("200", {
-        'Content-Type' : 'text/plain'
-    });
-    res.write(sys.inspect(res));
-    res.end();
-  });
-})
+var Hyjal = require('./lib/hyjal');
 
-server.listen(8000);
-
-console.log('Server running at port 8000...');
+new Hyjal({
+  port: 8000
+});
