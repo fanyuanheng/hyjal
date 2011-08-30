@@ -1,39 +1,20 @@
-var http = require('http')
-    , sys = require('sys')
-    , express  = require('express')
-    , jade = require('jade');
-
-function Hyjal(options) {
-  if (! (this instanceof arguments.callee)) {
-    return new arguments.callee(arguments);
-  }
-
-  var self = this;
-
-  self.settings = {
-    port: options.port
-  };
-
-  self.init();
-};
-
-Hyjal.prototype.init = function() {
-  var self = this;
-
-  self.httpServer = self.createHTTPServer();
-
-  require('./routes')(self.httpServer);
-
-  self.httpServer.listen(self.settings.port);
-
-  sys.log('Server started on PORT ' + self.settings.port);
-};
-
-Hyjal.prototype.createHTTPServer = function() {
-  var self = this;
-
-  var server = express.createServer();
-  return server;
-}
-
-module.exports = Hyjal;
+(function() {
+  var Hyjal, express, http, jade, sys;
+  http = require('http');
+  sys = require('sys');
+  express = require('express');
+  jade = require('jade');
+  Hyjal = (function() {
+    function Hyjal(options) {
+      this.settings = {
+        port: options.port
+      };
+      this.httpServer = express.createServer();
+      require('./routes')(this.httpServer);
+      this.httpServer.listen(this.settings.port);
+      sys.log('Server started on PORT ' + this.settings.port);
+    }
+    return Hyjal;
+  })();
+  module.exports = Hyjal;
+}).call(this);
