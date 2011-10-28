@@ -1,0 +1,7 @@
+source :rubygems
+
+gem 'cucumber'
+gem 'rake'
+gem 'rspec'
+gem 'capybara'
+gem 'gizmo'
