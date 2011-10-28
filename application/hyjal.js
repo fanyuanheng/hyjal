@@ -11,6 +11,7 @@
       };
       this.httpServer = express.createServer();
       require('./routes')(this.httpServer);
+      this.httpServer.use("/stylesheets", express.static(__dirname + '/public/css'));
       this.httpServer.listen(this.settings.port);
       sys.log('Server started on PORT ' + this.settings.port);
     }
